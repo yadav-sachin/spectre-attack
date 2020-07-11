@@ -169,7 +169,7 @@ int main()
         int most_likely_char = int('?');
 
         //Only consider those characters which have scores above THRESHOLD
-        while (results[PQ.top()] >= LIKELY_THRESHOLD)
+        while (!PQ.empty() && results[PQ.top()] >= LIKELY_THRESHOLD)
         {
             int curr_char = PQ.top();
             PQ.pop();
